@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Страницата не е намерена | NMStudio</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap">
+  <!-- GitHub Pages serves this file for any missing path, so everything it needs is inline
+       and the links below are pointed at the site root by the script at the bottom. -->
+  <style>
+    :root { --bg: #0a0a0a; --text: #f5f5f5; --muted: #a3a3a3; --line: rgba(255, 255, 255, .18); --brand: #ffd400; color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px;
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255, 212, 0, .10), transparent 70%),
+        linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
+      background-size: auto, 64px 64px, 64px 64px;
+      color: var(--text);
+      font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-feature-settings: "locl" 0;
+      text-align: center;
+    }
+    main { max-width: 520px; }
+    .logo { display: inline-block; margin-bottom: 40px; }
+    .logo img { height: 60px; width: auto; display: block; }
+    .code { margin: 0; font-size: clamp(88px, 22vw, 160px); font-weight: 800; line-height: 1; letter-spacing: -0.03em; color: var(--brand); }
+    h1 { margin: 12px 0 10px; font-size: clamp(24px, 5vw, 32px); font-weight: 800; letter-spacing: -0.02em; }
+    p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; text-decoration: none; transition: transform .25s; }
+    .btn:hover { transform: translateY(-2px); }
+    .primary { background: var(--brand); color: var(--bg); }
+    .ghost { color: var(--text); border: 1px solid var(--line); }
+    .en { margin-top: 36px; font-size: 14px; }
+    @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="logo home" href="/"><img id="logo" src="/img/logo.webp" alt="NMStudio" width="480" height="344"></a>
+    <p class="code">404</p>
+    <h1>Тази страница не съществува</h1>
+    <p>Може линкът да е грешен или страницата да е преместена.</p>
+    <div class="actions">
+      <a class="btn primary home" href="/">Към началната страница</a>
+      <a class="btn ghost" href="tel:+359878917966">Обадете се</a>
+    </div>
+    <p class="en">Page not found. <a class="home" href="/" style="color: var(--text)">Go to the homepage</a>.</p>
+  </main>
+  <script>
+    // On github.io the site lives under /NMStudio/, on a custom domain it lives at /.
+    const base = location.pathname.startsWith("/NMStudio/") ? "/NMStudio/" : "/";
+    document.querySelectorAll(".home").forEach(a => { a.href = base; });
+    document.getElementById("logo").src = base + "img/logo.webp";
+  </script>
+</body>
+</html>
