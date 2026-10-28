@@ -622,23 +622,29 @@ h3 {
 
 .js .reveal.in { opacity: 1; transform: none; }
 
-/* projects */
+/* projects: one big row per site, the picture swaps sides on every other row */
 .projects {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: 72px;
 }
 
-.project { display: block; }
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.project:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+.project:nth-child(even) .shot { order: 2; }
 
 .shot {
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid var(--line);
   background: var(--surface-solid);
-  margin-bottom: 18px;
   transition: border-color .3s, transform .5s var(--ease), box-shadow .5s;
 }
 
@@ -674,17 +680,54 @@ h3 {
 
 .project-head {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
+  flex-direction: column;
+  gap: 2px;
 }
 
+.project h3 { font-size: clamp(24px, 2.4vw, 32px); letter-spacing: -0.02em; }
+
 .project .url {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--faint);
-  white-space: nowrap;
   transition: color .2s;
 }
+
+/* features and timeline under the description */
+.facts {
+  display: grid;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.facts div {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.facts dt { color: var(--faint); }
+.facts dd { margin: 0; color: var(--text); }
+
+/* always-visible button, so touch screens have something to tap */
+.visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+  padding: 6px 6px 6px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line-hover);
+  font-size: 15px;
+  font-weight: 700;
+  transition: border-color .25s, background-color .25s;
+}
+
+.visit .badge { width: 34px; height: 34px; margin-left: 0; }
+
+.project:hover .visit { border-color: var(--brand); background: rgba(255, 212, 0, .06); }
 
 /* round badge next to links: a little browser window for sites, a handset for calls */
 .badge {
@@ -728,9 +771,10 @@ h3 {
 .project:hover .url { color: var(--text); }
 
 .project p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 15px;
+  margin: 14px 0 0;
+  color: #c4c4c4;
+  font-size: 17px;
+  line-height: 1.55;
 }
 
 /* team */
@@ -774,7 +818,13 @@ h3 {
   min-width: 0;
 }
 
-.person-info h3 { margin-bottom: 4px; }
+.person-info h3 { margin-bottom: 0; }
+
+.role {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
 
 .person-phone {
   font-size: 17px;
@@ -943,7 +993,10 @@ footer p { margin: 0; }
 }
 
 @media (max-width: 860px) {
-  .projects { grid-template-columns: 1fr; gap: 48px; }
+  .projects { gap: 56px; }
+  .project { grid-template-columns: 1fr; gap: 22px; }
+  .project:nth-child(even) { grid-template-columns: 1fr; }
+  .project:nth-child(even) .shot { order: 0; }
   .people, .phones { grid-template-columns: 1fr; }
   .made-label { width: 100%; }
 }
