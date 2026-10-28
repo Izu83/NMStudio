@@ -31,13 +31,20 @@ const text = {
     roleNikolay: "[Роля]",
     roleMitko: "[Роля]",
     contactHead: "Всеки проект е различен.",
-    contactBody: "Затова не публикуваме цени. Обадете ни се, разкажете ни какво ви трябва и заедно ще уговорим цената.",
+    contactBody: "Цената зависи от това какво ви трябва. Ето от колко започваме:",
+    priceSite: "Сайт",
+    priceSiteFrom: "от [X] €",
+    priceShop: "Онлайн магазин",
+    priceShopFrom: "от [X] €",
+    promiseConsult: "Безплатна консултация",
+    promiseReply: "Отговаряме до [X] часа",
     callNow: "Обадете се",
     studioMail: "Или пишете на",
     copy: "Копирай",
     copied: "Копирано",
     top: "Нагоре",
-    description: "NMStudio сме Николай Рангелов и Митко Тотев. Правим сайтове и онлайн магазини."
+    docTitle: "NMStudio | Сайтове и онлайн магазини",
+    description: "NMStudio сме Николай Рангелов и Митко Тотев. Правим бързи и красиви сайтове и онлайн магазини за бизнеси."
   },
   en: {
     navWork: "Work",
@@ -70,13 +77,20 @@ const text = {
     roleNikolay: "[Role]",
     roleMitko: "[Role]",
     contactHead: "Every project is different.",
-    contactBody: "That's why we don't list prices. Give us a call, tell us what you need and we'll agree on the price together.",
+    contactBody: "The price depends on what you need. Here is where we start:",
+    priceSite: "Website",
+    priceSiteFrom: "from €[X]",
+    priceShop: "Online store",
+    priceShopFrom: "from €[X]",
+    promiseConsult: "Free consultation",
+    promiseReply: "We reply within [X] hours",
     callNow: "Call",
     studioMail: "Or email",
     copy: "Copy",
     copied: "Copied",
     top: "Back to top",
-    description: "NMStudio is Nikolay Rangelov and Mitko Totev. We make websites and online stores."
+    docTitle: "NMStudio | Websites and online stores",
+    description: "NMStudio is Nikolay Rangelov and Mitko Totev. We build fast, beautiful websites and online stores for businesses."
   }
 };
 
@@ -117,6 +131,7 @@ function applyLang(lang) {
   document.querySelectorAll("[data-i18n-alt]").forEach(el => { el.alt = t[el.dataset.i18nAlt]; });
   document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t[el.dataset.i18nAria]); });
   document.querySelector('meta[name="description"]').content = t.description;
+  document.title = t.docTitle;
   langButton.textContent = lang === "bg" ? "EN" : "БГ";
   langButton.setAttribute("aria-label", lang === "bg" ? "Switch to English" : "Смени на български");
   splitTitle();
