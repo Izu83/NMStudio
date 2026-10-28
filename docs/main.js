@@ -7,25 +7,22 @@ const text = {
     call: "Обадете се",
     title1: "Сайтове и",
     title2: "онлайн магазини.",
-    intro: "NMStudio сме двама души: Николай Рангелов и Митко Тотев. Обадете ни се и ще поговорим за вашия сайт.",
     made: "Сайтове, които сме направили:",
-    nikolayShort: "Николай",
-    mitkoShort: "Митко",
-    airflow: "Онлайн магазин за AirPods и слушалки.",
-    toh: "Онлайн магазин за маратонки и футболни обувки.",
-    trendflow: "Сайт на студио, което прави видео съдържание за бизнеси.",
-    hint: "Задръжте мишката върху проект, за да го разгледате.",
+    airflow: "Онлайн магазин за слушалки.",
+    toh: "Онлайн магазин за обувки и бутонки.",
+    trendflow: "Сайт за агенция, която заснема видеа, монтаж и поддържа социални мрежи на бизнеси.",
     altAirflow: "Начална страница на airflowpods.com",
     altToh: "Начална страница на tohshoes.com",
     altTrendflow: "Начална страница на trendflow.bg",
     nikolay: "Николай Рангелов",
     mitko: "Митко Тотев",
-    contact: "Всеки проект е различен, затова не публикуваме цени. Обадете ни се, разкажете ни какво ви трябва и заедно ще уговорим цената.",
-    callNow: "Обадете се ↗",
+    contactHead: "Всеки проект е различен.",
+    contactBody: "Затова не публикуваме цени. Обадете ни се, разкажете ни какво ви трябва и заедно ще уговорим цената.",
+    callNow: "Обадете се",
     studioMail: "Или пишете на",
     copy: "Копирай",
     copied: "Копирано",
-    top: "Нагоре ↑",
+    top: "Нагоре",
     description: "NMStudio сме Николай Рангелов и Митко Тотев. Правим сайтове и онлайн магазини."
   },
   en: {
@@ -35,25 +32,22 @@ const text = {
     call: "Call us",
     title1: "Websites and",
     title2: "online stores.",
-    intro: "NMStudio is two people: Nikolay Rangelov and Mitko Totev. Give us a call and we'll talk about your site.",
     made: "Sites we've made:",
-    nikolayShort: "Nikolay",
-    mitkoShort: "Mitko",
-    airflow: "Online store for AirPods and headphones.",
-    toh: "Online store for sneakers and football boots.",
-    trendflow: "Website for a studio that makes video content for businesses.",
-    hint: "Hover over a project to scroll through it.",
+    airflow: "Online store for headphones.",
+    toh: "Online store for shoes and football boots.",
+    trendflow: "Website for an agency that shoots videos, edits them and runs social media for businesses.",
     altAirflow: "Homepage of airflowpods.com",
     altToh: "Homepage of tohshoes.com",
     altTrendflow: "Homepage of trendflow.bg",
     nikolay: "Nikolay Rangelov",
     mitko: "Mitko Totev",
-    contact: "Every project is different, so we don't list prices. Give us a call, tell us what you need and we'll agree on the price together.",
-    callNow: "Call ↗",
+    contactHead: "Every project is different.",
+    contactBody: "That's why we don't list prices. Give us a call, tell us what you need and we'll agree on the price together.",
+    callNow: "Call",
     studioMail: "Or email",
     copy: "Copy",
     copied: "Copied",
-    top: "Back to top ↑",
+    top: "Back to top",
     description: "NMStudio is Nikolay Rangelov and Mitko Totev. We make websites and online stores."
   }
 };
@@ -93,6 +87,7 @@ function applyLang(lang) {
   root.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t[el.dataset.i18n]; });
   document.querySelectorAll("[data-i18n-alt]").forEach(el => { el.alt = t[el.dataset.i18nAlt]; });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t[el.dataset.i18nAria]); });
   document.querySelector('meta[name="description"]').content = t.description;
   langButton.textContent = lang === "bg" ? "EN" : "БГ";
   langButton.setAttribute("aria-label", lang === "bg" ? "Switch to English" : "Смени на български");
@@ -118,9 +113,13 @@ requestAnimationFrame(() => {
   playTitle();
 });
 
-// Header gets a background once the page is scrolled.
+// Header gets a background once the page is scrolled; the back-to-top button shows near the bottom.
 const header = document.getElementById("header");
-const onScroll = () => header.classList.toggle("scrolled", scrollY > 8);
+const toTop = document.getElementById("to-top");
+const onScroll = () => {
+  header.classList.toggle("scrolled", scrollY > 8);
+  toTop.classList.toggle("show", innerHeight + scrollY >= document.documentElement.scrollHeight - 420);
+};
 addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 

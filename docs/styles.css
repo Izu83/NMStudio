@@ -1,14 +1,17 @@
 :root {
-  --bg: #09090b;
-  --surface: rgba(22, 22, 27, .62);
-  --surface-solid: #141418;
-  --text: #f3f3f5;
-  --muted: #8d8d96;
-  --faint: #5e5e68;
+  --bg: #0a0a0a;
+  --surface: rgba(24, 24, 24, .62);
+  --surface-solid: #151515;
+  --text: #f5f5f5;
+  --muted: #8f8f8f;
+  --faint: #5f5f5f;
   --line: rgba(255, 255, 255, .07);
-  --line-hover: rgba(255, 255, 255, .16);
-  --violet: #8b7bff;
-  --blue: #4fb8ff;
+  --line-hover: rgba(255, 255, 255, .18);
+  --accent: #ffffff;
+  --silver: #7a7a7a;
+  /* one signal-yellow accent on the black & white logo palette */
+  --brand: #ffd400;
+  --brand-soft: #ffe566;
   --ease: cubic-bezier(.2, .7, .1, 1);
   color-scheme: dark;
 }
@@ -30,11 +33,11 @@ body {
 }
 
 /* the main heading uses Manrope's Bulgarian letter shapes, the same look as airflowpods.com */
-h1 { font-feature-settings: normal; }
+h1, .pitch-head { font-feature-settings: normal; }
 
 button { font-feature-settings: "locl" 0; }
 
-::selection { background: var(--violet); color: #fff; }
+::selection { background: var(--brand); color: var(--bg); }
 
 a { color: inherit; text-decoration: none; }
 
@@ -67,7 +70,7 @@ img { display: block; max-width: 100%; height: auto; }
   height: 70vmax;
   left: -25vmax;
   top: -35vmax;
-  background: radial-gradient(closest-side, rgba(110, 80, 255, .30), transparent);
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .11), transparent);
   animation: drift1 24s ease-in-out infinite alternate;
 }
 
@@ -76,7 +79,7 @@ img { display: block; max-width: 100%; height: auto; }
   height: 60vmax;
   right: -28vmax;
   top: -10vmax;
-  background: radial-gradient(closest-side, rgba(40, 140, 255, .20), transparent);
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .06), transparent);
   animation: drift2 30s ease-in-out infinite alternate;
 }
 
@@ -85,7 +88,7 @@ img { display: block; max-width: 100%; height: auto; }
   height: 55vmax;
   left: 20vw;
   bottom: -40vmax;
-  background: radial-gradient(closest-side, rgba(190, 70, 255, .12), transparent);
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .045), transparent);
   animation: drift3 34s ease-in-out infinite alternate;
 }
 
@@ -134,7 +137,7 @@ main, nav a, footer { transition: opacity .18s; }
 }
 
 .site-header.scrolled {
-  background: rgba(9, 9, 11, .7);
+  background: rgba(10, 10, 10, .7);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   border-bottom-color: var(--line);
@@ -183,21 +186,21 @@ nav a:not(.nav-call)::after {
   transition: transform .35s var(--ease);
 }
 
-nav a:hover { color: var(--text); }
+nav a:hover { color: var(--brand-soft); }
 nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 
 .nav-call {
-  color: #fff;
+  color: var(--bg);
   font-weight: 600;
   padding: 6px 16px;
   border-radius: 999px;
-  background: linear-gradient(120deg, var(--violet), #6a5cff 55%, var(--blue));
-  box-shadow: 0 6px 24px -8px rgba(120, 100, 255, .7);
+  background: linear-gradient(120deg, #fff, #d4d4d4);
+  box-shadow: 0 6px 24px -8px rgba(255, 255, 255, .35);
   transition: transform .25s var(--ease), box-shadow .25s;
 }
 
-nav .nav-call { color: #fff; }
-.nav-call:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -8px rgba(120, 100, 255, .9); }
+nav .nav-call { color: var(--bg); }
+.nav-call:hover { transform: translateY(-1px); background: var(--brand); box-shadow: 0 10px 30px -8px rgba(255, 212, 0, .6); }
 
 .lang {
   font: inherit;
@@ -214,7 +217,7 @@ nav .nav-call { color: #fff; }
   transition: border-color .2s, transform .2s var(--ease);
 }
 
-.lang:hover { border-color: var(--line-hover); }
+.lang:hover { border-color: rgba(255, 212, 0, .55); }
 .lang:active { transform: scale(.94); }
 
 /* sections */
@@ -231,7 +234,7 @@ h1 {
 h1 .l { display: block; }
 
 .grad .w > span {
-  background: linear-gradient(100deg, var(--violet) 0%, #a78bff 40%, var(--blue) 100%);
+  background: linear-gradient(100deg, var(--accent) 0%, #c8c8c8 45%, var(--silver) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -291,12 +294,22 @@ h3 {
 
 .intro { padding-top: 104px; padding-bottom: 96px; }
 
-.intro p,
-#contact > p {
-  max-width: 540px;
-  color: var(--muted);
-  font-size: 17px;
+/* contact pitch: a big statement, then the plain explanation under it */
+.pitch-head {
+  margin: 0 0 18px;
+  font-size: clamp(34px, 5.4vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+
+.pitch-body {
+  max-width: 640px;
   margin: 0;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.6;
+  color: #b8b8b8;
 }
 
 /* hero phone buttons */
@@ -308,34 +321,55 @@ h3 {
 }
 
 .call {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 22px 14px 18px;
-  border-radius: 14px;
-  background: var(--surface);
+  gap: 28px;
+  min-width: 300px;
+  padding: 14px 14px 16px 16px;
+  border-radius: 18px;
+  background: var(--surface-solid);
   border: 1px solid var(--line);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  transition: border-color .25s, transform .25s var(--ease), background-color .25s;
+  transition: border-color .25s, transform .25s var(--ease);
 }
 
-.call:first-child {
-  background: linear-gradient(120deg, rgba(139, 123, 255, .22), rgba(79, 184, 255, .12));
-  border-color: rgba(139, 123, 255, .35);
+.call:hover { transform: translateY(-2px); border-color: rgba(255, 212, 0, .55); }
+
+.call-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
 }
 
-.call:hover { transform: translateY(-2px); border-color: var(--line-hover); }
-.call:first-child:hover { border-color: rgba(139, 123, 255, .6); }
+/* the person you're calling, above their number */
+.call-who {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
 
-.call svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--violet);
+.call-who img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px var(--surface-solid), 0 0 0 3px var(--line-hover);
+  transition: box-shadow .25s;
+}
+
+.call:hover .call-who img { box-shadow: 0 0 0 2px var(--surface-solid), 0 0 0 3px var(--brand); }
+
+.call .badge {
+  width: 44px;
+  height: 44px;
+  margin-left: 0;
   flex-shrink: 0;
 }
 
-.call:hover svg { animation: ring .6s ease-in-out; }
+.call .badge svg { width: 17px; height: 17px; }
 
 @keyframes ring {
   0%, 100% { transform: rotate(0); }
@@ -343,16 +377,19 @@ h3 {
   40%, 80% { transform: rotate(14deg); }
 }
 
-.call .who {
-  color: var(--muted);
-  font-size: 14px;
+.call .num {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
-.call .num {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  font-variant-numeric: tabular-nums;
+/* phone numbers carry the colour accent */
+.call .num,
+.person-phone,
+.phone-card .big {
+  color: var(--brand);
 }
 
 /* small list of the sites we've made */
@@ -391,9 +428,10 @@ h3 {
 
 .chip:hover {
   color: var(--text);
-  border-color: var(--line-hover);
+  border-color: rgba(255, 212, 0, .55);
   transform: translateY(-1px);
 }
+
 
 /* scroll reveal */
 .js .reveal {
@@ -435,7 +473,7 @@ h3 {
 .project:hover .shot {
   border-color: var(--line-hover);
   transform: translateY(-4px);
-  box-shadow: 0 24px 60px -24px rgba(110, 90, 255, .45);
+  box-shadow: 0 24px 60px -24px rgba(255, 212, 0, .25);
 }
 
 .project:hover .shot img {
@@ -469,28 +507,51 @@ h3 {
   transition: color .2s;
 }
 
-.arrow {
-  display: inline-block;
-  transition: transform .35s var(--ease);
+/* round badge next to links: a little browser window for sites, a handset for calls */
+.badge {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-left: 8px;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 1px solid var(--line-hover);
+  color: var(--muted);
+  transition: background-color .25s, border-color .25s, color .25s, transform .4s var(--ease);
 }
 
+.badge svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.badge .dot { fill: currentColor; stroke: none; }
+.badge-call svg { fill: currentColor; stroke: none; }
+.phone-card .badge { margin-left: 0; }
+
+.project:hover .badge,
+.phone-card:hover .badge,
+.call:hover .badge {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--bg);
+  transform: rotate(-10deg) scale(1.1);
+}
+
+.phone-card:hover .badge-call svg,
+.call:hover .badge-call svg { animation: ring .6s ease-in-out; }
+
 .project:hover .url { color: var(--text); }
-.project:hover .arrow { transform: translate(2px, -2px); }
 
 .project p {
   margin: 6px 0 0;
   color: var(--muted);
   font-size: 15px;
-}
-
-.hint {
-  margin: 28px 0 0;
-  font-size: 13px;
-  color: var(--faint);
-}
-
-@media (hover: none) {
-  .hint { display: none; }
 }
 
 /* team */
@@ -514,7 +575,7 @@ h3 {
 
 .js .person.in { transition: opacity .9s var(--ease), transform .9s var(--ease), border-color .3s; transition-delay: var(--d, 0ms), var(--d, 0ms), 0ms; }
 
-.person:hover { border-color: var(--line-hover); }
+.person:hover { border-color: rgba(255, 212, 0, .4); }
 
 .person img {
   width: 96px;
@@ -540,12 +601,11 @@ h3 {
   font-size: 17px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: var(--text);
   margin-bottom: 4px;
-  transition: color .2s;
+  transition: filter .2s;
 }
 
-.person-phone:hover { color: var(--violet); }
+.person-phone:hover { filter: brightness(1.3); }
 
 .person-info .line {
   font-size: 14px;
@@ -554,7 +614,7 @@ h3 {
   overflow-wrap: anywhere;
 }
 
-.person-info .line:hover { color: var(--text); }
+.person-info .line:hover { color: var(--brand-soft); }
 
 /* contact */
 .phones {
@@ -583,13 +643,13 @@ h3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 120%), rgba(139, 123, 255, .18), transparent 45%);
+  background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 120%), rgba(255, 212, 0, .12), transparent 45%);
   opacity: 0;
   transition: opacity .4s;
   pointer-events: none;
 }
 
-.phone-card:hover { border-color: rgba(139, 123, 255, .45); transform: translateY(-3px); }
+.phone-card:hover { border-color: rgba(255, 212, 0, .45); transform: translateY(-3px); }
 .phone-card:hover::before { opacity: 1; }
 
 .phone-card .who {
@@ -610,7 +670,10 @@ h3 {
   margin-top: 10px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--violet);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   transition: transform .3s var(--ease);
 }
 
@@ -627,6 +690,7 @@ h3 {
 }
 
 .studio-mail a { color: var(--text); font-weight: 500; }
+.studio-mail a:hover { color: var(--brand-soft); }
 
 .copy {
   font: inherit;
@@ -641,9 +705,9 @@ h3 {
   transition: color .2s, border-color .2s, transform .2s var(--ease);
 }
 
-.copy:hover { color: var(--text); border-color: var(--line-hover); }
+.copy:hover { color: var(--text); border-color: rgba(255, 212, 0, .55); }
 .copy:active { transform: scale(.95); }
-.copy.done { color: #7ee2a8; border-color: #24533a; }
+.copy.done { color: var(--text); border-color: rgba(255, 255, 255, .45); }
 
 footer {
   display: flex;
@@ -656,7 +720,42 @@ footer {
 
 footer p { margin: 0; }
 
-footer a:hover { color: var(--text); }
+/* round back-to-top button, appears once you reach the bottom of the page */
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: var(--bg);
+  box-shadow: 0 12px 30px -10px rgba(255, 212, 0, .55), 0 0 0 6px rgba(255, 212, 0, .08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(18px) scale(.85);
+  transition: opacity .35s, visibility .35s, transform .45s var(--ease), box-shadow .3s;
+}
+
+.to-top.show { opacity: 1; visibility: visible; transform: none; }
+
+.to-top svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.to-top:hover { transform: translateY(-4px); box-shadow: 0 16px 36px -10px rgba(255, 212, 0, .7), 0 0 0 8px rgba(255, 212, 0, .12); }
+.to-top:hover svg { animation: lift .7s var(--ease) infinite alternate; }
+
+@keyframes lift { to { transform: translateY(-3px); } }
 
 @media (max-width: 860px) {
   .projects { grid-template-columns: 1fr; gap: 48px; }
@@ -674,11 +773,12 @@ footer a:hover { color: var(--text); }
   section { padding-top: 56px; padding-bottom: 56px; }
   .intro { padding-top: 56px; padding-bottom: 64px; }
   .hero-call { flex-direction: column; }
-  .call { width: 100%; }
+  .call { width: 100%; min-width: 0; }
   .person { flex-direction: column; align-items: flex-start; }
   .person img { width: 80px; height: 80px; }
   .phone-card { padding: 22px; }
   .grid { background-size: 44px 44px; }
+  .to-top { right: 16px; bottom: 16px; width: 50px; height: 50px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
