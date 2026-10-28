@@ -7,8 +7,6 @@
   --faint: #5f5f5f;
   --line: rgba(255, 255, 255, .07);
   --line-hover: rgba(255, 255, 255, .18);
-  --accent: #ffffff;
-  --silver: #7a7a7a;
   /* one signal-yellow accent on the black & white logo palette */
   --brand: #ffd400;
   --brand-soft: #ffe566;
@@ -233,16 +231,6 @@ h1 {
 
 h1 .l { display: block; }
 
-.grad .w > span {
-  background: linear-gradient(100deg, var(--accent) 0%, #c8c8c8 45%, var(--silver) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  /* the gradient only paints inside the box, so stretch it over the tail of з */
-  padding-bottom: .3em;
-  margin-bottom: -.3em;
-}
-
 /* heading words slide up from behind a mask */
 .w {
   display: inline-block;
@@ -292,7 +280,196 @@ h3 {
   margin: 0;
 }
 
-.intro { padding-top: 104px; padding-bottom: 96px; }
+.intro { padding-top: 72px; padding-bottom: 96px; }
+
+/* hero: text on the left, our sites on a laptop on the right */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: 56px;
+  align-items: center;
+}
+
+/* soft light behind the headline */
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -10%;
+  top: -20%;
+  width: 70%;
+  height: 90%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .07), transparent);
+  pointer-events: none;
+}
+
+.intro h1 { font-size: clamp(44px, 4.8vw, 64px); margin-bottom: 22px; }
+
+.hero-sub {
+  max-width: 520px;
+  margin: 0;
+  font-size: clamp(17px, 1.5vw, 19px);
+  font-weight: 500;
+  line-height: 1.6;
+  color: #c4c4c4;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+  transition: transform .25s var(--ease), background-color .25s, border-color .25s, box-shadow .25s;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: var(--bg);
+  box-shadow: 0 12px 32px -14px rgba(255, 212, 0, .7);
+}
+
+.btn-primary:hover { transform: translateY(-2px); background: #ffe033; box-shadow: 0 16px 38px -14px rgba(255, 212, 0, .85); }
+
+.btn-ghost {
+  color: var(--text);
+  background: rgba(255, 255, 255, .03);
+  border: 1px solid var(--line-hover);
+}
+
+.btn-ghost:hover { transform: translateY(-2px); border-color: var(--brand-soft); }
+
+.btn:active { transform: scale(.97); }
+
+/* laptop mockup */
+.hero-visual { position: relative; }
+
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -15% -20%;
+  background: radial-gradient(closest-side, rgba(255, 212, 0, .13), transparent);
+  pointer-events: none;
+}
+
+.laptop {
+  transform: perspective(1800px) rotateY(-9deg) rotateX(3deg);
+  transition: transform .8s var(--ease);
+}
+
+.hero-visual:hover .laptop { transform: perspective(1800px) rotateY(-3deg) rotateX(1deg); }
+
+.screen {
+  padding: 10px;
+  border-radius: 16px 16px 6px 6px;
+  background: #050505;
+  border: 1px solid var(--line-hover);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .9), 0 0 0 1px rgba(0, 0, 0, .6);
+}
+
+.screen-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 8px 8px 0 0;
+  background: #161616;
+}
+
+.screen-bar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.screen-url {
+  position: relative;
+  flex: 1;
+  height: 16px;
+  margin-left: 8px;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--muted);
+}
+
+.screen-view {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 0 0 6px 6px;
+  background: var(--surface-solid);
+}
+
+.screen-url span,
+.screen-view img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  animation: turn 18s var(--ease) infinite backwards;
+}
+
+.screen-view img {
+  width: 100%;
+  animation-name: turn, browse-hero;
+}
+
+.screen-url span:nth-child(2),
+.screen-view img:nth-child(2) { animation-delay: 6s; }
+
+.screen-url span:nth-child(3),
+.screen-view img:nth-child(3) { animation-delay: 12s; }
+
+/* without animation the first site simply stays on screen */
+.screen-url span:first-child,
+.screen-view img:first-child { opacity: 1; }
+
+/* each site fades in, scrolls a little, fades out */
+@keyframes turn {
+  0% { opacity: 0; }
+  4%, 30% { opacity: 1; }
+  34%, 100% { opacity: 0; }
+}
+
+@keyframes browse-hero {
+  0%, 6% { transform: translateY(0); }
+  32%, 100% { transform: translateY(-14%); }
+}
+
+.laptop-base {
+  position: relative;
+  height: 14px;
+  margin: 0 -7%;
+  border-radius: 2px 2px 14px 14px;
+  background: linear-gradient(#3a3a3a, #1c1c1c 60%, #111);
+  box-shadow: 0 18px 30px -12px rgba(0, 0, 0, .8);
+}
+
+.laptop-base::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 18%;
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 0 0 6px 6px;
+  background: #0d0d0d;
+}
 
 /* contact pitch: a big statement, then the plain explanation under it */
 .pitch-head {
@@ -317,14 +494,14 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 36px;
+  margin-top: 28px;
 }
 
 .call {
   display: flex;
   align-items: center;
-  gap: 28px;
-  min-width: 300px;
+  gap: 20px;
+  min-width: 270px;
   padding: 14px 14px 16px 16px;
   border-radius: 18px;
   background: var(--surface-solid);
@@ -757,6 +934,12 @@ footer p { margin: 0; }
 
 @keyframes lift { to { transform: translateY(-3px); } }
 
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .intro h1 { font-size: clamp(44px, 9vw, 84px); }
+}
+
 @media (max-width: 860px) {
   .projects { grid-template-columns: 1fr; gap: 48px; }
   .people, .phones { grid-template-columns: 1fr; }
@@ -773,6 +956,7 @@ footer p { margin: 0; }
   section { padding-top: 56px; padding-bottom: 56px; }
   .intro { padding-top: 56px; padding-bottom: 64px; }
   .hero-call { flex-direction: column; }
+  .hero-cta .btn { flex: 1 1 100%; }
   .call { width: 100%; min-width: 0; }
   .person { flex-direction: column; align-items: flex-start; }
   .person img { width: 80px; height: 80px; }
