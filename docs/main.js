@@ -133,7 +133,7 @@ function applyLang(lang) {
   document.querySelector('meta[name="description"]').content = t.description;
   document.title = t.docTitle;
   langButton.textContent = lang === "bg" ? "EN" : "БГ";
-  langButton.setAttribute("aria-label", lang === "bg" ? "Switch to English" : "Смени на български");
+  langButton.setAttribute("aria-label", lang === "bg" ? "EN: Switch to English" : "БГ: Смени на български");
   splitTitle();
   try { localStorage.setItem("lang", lang); } catch (e) {}
 }
