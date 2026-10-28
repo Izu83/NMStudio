@@ -368,8 +368,25 @@ h3 {
 
 .laptop {
   transform: perspective(1800px) rotateY(-9deg) rotateX(3deg);
+  transform-style: preserve-3d;
   transition: transform .8s var(--ease);
 }
+
+/* the lid swings open from the base when the hero appears, then the screen lights up */
+.js .hero-visual:not(.in) .screen { transform: rotateX(-86deg); }
+
+.screen-view::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .8s ease 1.5s;
+}
+
+.js .hero-visual:not(.in) .screen-view::after { opacity: 1; }
 
 .hero-visual:hover .laptop { transform: perspective(1800px) rotateY(-3deg) rotateX(1deg); }
 
@@ -379,6 +396,8 @@ h3 {
   background: #050505;
   border: 1px solid var(--line-hover);
   box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .9), 0 0 0 1px rgba(0, 0, 0, .6);
+  transform-origin: 50% 100%;
+  transition: transform 1.6s cubic-bezier(.25, .9, .25, 1) .45s;
 }
 
 .screen-bar {
@@ -485,35 +504,11 @@ h3 {
 
 .pitch-body {
   max-width: 640px;
-  margin: 0 0 22px;
+  margin: 0;
   font-size: clamp(17px, 1.6vw, 20px);
   line-height: 1.6;
   color: #b8b8b8;
 }
-
-/* starting prices */
-.prices {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.prices li {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 200px;
-  padding: 16px 22px;
-  border-radius: 16px;
-  background: var(--surface-solid);
-  border: 1px solid var(--line);
-}
-
-.prices span { font-size: 14px; color: var(--muted); }
-.prices strong { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
 
 .pitch-cta {
   display: flex;
@@ -633,17 +628,27 @@ h3 {
 /* small list of the sites we've made */
 .made {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 36px;
   font-size: 13px;
 }
 
-.made-label {
-  color: var(--faint);
-  margin-right: 4px;
+.made-label { color: var(--faint); }
+
+/* the three sites always sit on one line; on very narrow phones the row scrolls sideways */
+.chips {
+  display: flex;
+  gap: 8px;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+
+.chips::-webkit-scrollbar { display: none; }
+
+.chip { flex-shrink: 0; white-space: nowrap; }
 
 .chip {
   display: inline-flex;
@@ -750,25 +755,6 @@ h3 {
   color: var(--faint);
   transition: color .2s;
 }
-
-/* features and timeline under the description */
-.facts {
-  display: grid;
-  gap: 10px;
-  margin: 22px 0 0;
-  padding: 18px 0 0;
-  border-top: 1px solid var(--line);
-}
-
-.facts div {
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: 12px;
-  font-size: 15px;
-}
-
-.facts dt { color: var(--faint); }
-.facts dd { margin: 0; color: var(--text); }
 
 /* always-visible button, so touch screens have something to tap */
 .visit {
@@ -877,13 +863,7 @@ h3 {
   min-width: 0;
 }
 
-.person-info h3 { margin-bottom: 0; }
-
-.role {
-  margin: 0 0 8px;
-  font-size: 14px;
-  color: var(--muted);
-}
+.person-info h3 { margin-bottom: 4px; }
 
 .person-phone {
   font-size: 17px;
@@ -1057,7 +1037,6 @@ footer p { margin: 0; }
   .project:nth-child(even) { grid-template-columns: 1fr; }
   .project:nth-child(even) .shot { order: 0; }
   .people, .phones { grid-template-columns: 1fr; }
-  .made-label { width: 100%; }
 }
 
 @media (max-width: 480px) {
@@ -1071,7 +1050,10 @@ footer p { margin: 0; }
   .intro { padding-top: 56px; padding-bottom: 64px; }
   .hero-call { flex-direction: column; }
   .hero-cta .btn, .pitch-cta .btn { flex: 1 1 100%; }
-  .prices li { flex: 1 1 100%; }
+  /* phones: names only, so all three sites fit on one line */
+  .chips { gap: 6px; }
+  .chip { padding: 5px 11px; font-size: 12px; }
+  .chip img { display: none; }
   .call { width: 100%; min-width: 0; }
   .person { flex-direction: column; align-items: flex-start; }
   .person img { width: 80px; height: 80px; }
