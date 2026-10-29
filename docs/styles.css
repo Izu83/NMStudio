@@ -9,8 +9,8 @@
   --line: rgba(255, 255, 255, .07);
   --line-hover: rgba(255, 255, 255, .18);
   /* one signal-yellow accent on the black & white logo palette */
-  --brand: #ffd400;
-  --brand-soft: #ffe566;
+  --brand: #fefacd;
+  --brand-soft: #fffde6;
   --ease: cubic-bezier(.2, .7, .1, 1);
   color-scheme: dark;
 }
@@ -199,7 +199,7 @@ nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 }
 
 nav .nav-call { color: var(--bg); }
-.nav-call:hover { transform: translateY(-1px); background: var(--brand); box-shadow: 0 10px 30px -8px rgba(255, 212, 0, .6); }
+.nav-call:hover { transform: translateY(-1px); background: var(--brand); box-shadow: 0 10px 30px -8px rgba(254, 250, 205, .6); }
 
 .lang {
   font: inherit;
@@ -216,7 +216,7 @@ nav .nav-call { color: var(--bg); }
   transition: border-color .2s, transform .2s var(--ease);
 }
 
-.lang:hover { border-color: rgba(255, 212, 0, .55); }
+.lang:hover { border-color: rgba(254, 250, 205, .55); }
 .lang:active { transform: scale(.94); }
 
 /* sections */
@@ -339,10 +339,10 @@ h3 {
 .btn-primary {
   background: var(--brand);
   color: var(--bg);
-  box-shadow: 0 12px 32px -14px rgba(255, 212, 0, .7);
+  box-shadow: 0 12px 32px -14px rgba(254, 250, 205, .7);
 }
 
-.btn-primary:hover { transform: translateY(-2px); background: #ffe033; box-shadow: 0 16px 38px -14px rgba(255, 212, 0, .85); }
+.btn-primary:hover { transform: translateY(-2px); background: #fffbe0; box-shadow: 0 16px 38px -14px rgba(254, 250, 205, .85); }
 
 .btn-ghost {
   color: var(--text);
@@ -362,7 +362,7 @@ h3 {
   position: absolute;
   z-index: -1;
   inset: -15% -20%;
-  background: radial-gradient(closest-side, rgba(255, 212, 0, .13), transparent);
+  background: radial-gradient(closest-side, rgba(254, 250, 205, .13), transparent);
   pointer-events: none;
 }
 
@@ -565,7 +565,7 @@ h3 {
   transition: border-color .25s, transform .25s var(--ease);
 }
 
-.call:hover { transform: translateY(-2px); border-color: rgba(255, 212, 0, .55); }
+.call:hover { transform: translateY(-2px); border-color: rgba(254, 250, 205, .55); }
 
 .call-text {
   display: flex;
@@ -671,7 +671,7 @@ h3 {
 
 .chip:hover {
   color: var(--text);
-  border-color: rgba(255, 212, 0, .55);
+  border-color: rgba(254, 250, 205, .55);
   transform: translateY(-1px);
 }
 
@@ -722,7 +722,7 @@ h3 {
 .project:hover .shot {
   border-color: var(--line-hover);
   transform: translateY(-4px);
-  box-shadow: 0 24px 60px -24px rgba(255, 212, 0, .25);
+  box-shadow: 0 24px 60px -24px rgba(254, 250, 205, .25);
 }
 
 .project:hover .shot img {
@@ -772,7 +772,7 @@ h3 {
 
 .visit .badge { width: 34px; height: 34px; margin-left: 0; }
 
-.project:hover .visit { border-color: var(--brand); background: rgba(255, 212, 0, .06); }
+.project:hover .visit { border-color: var(--brand); background: rgba(254, 250, 205, .06); }
 
 /* round badge next to links: a little browser window for sites, a handset for calls */
 .badge {
@@ -843,7 +843,7 @@ h3 {
 
 .js .person.in { transition: opacity .9s var(--ease), transform .9s var(--ease), border-color .3s; transition-delay: var(--d, 0ms), var(--d, 0ms), 0ms; }
 
-.person:hover { border-color: rgba(255, 212, 0, .4); }
+.person:hover { border-color: rgba(254, 250, 205, .4); }
 
 .person img {
   width: 96px;
@@ -917,13 +917,13 @@ h3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 120%), rgba(255, 212, 0, .12), transparent 45%);
+  background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 120%), rgba(254, 250, 205, .12), transparent 45%);
   opacity: 0;
   transition: opacity .4s;
   pointer-events: none;
 }
 
-.phone-card:hover { border-color: rgba(255, 212, 0, .45); transform: translateY(-3px); }
+.phone-card:hover { border-color: rgba(254, 250, 205, .45); transform: translateY(-3px); }
 .phone-card:hover::before { opacity: 1; }
 
 .phone-card .who {
@@ -979,7 +979,7 @@ h3 {
   transition: color .2s, border-color .2s, transform .2s var(--ease);
 }
 
-.copy:hover { color: var(--text); border-color: rgba(255, 212, 0, .55); }
+.copy:hover { color: var(--text); border-color: rgba(254, 250, 205, .55); }
 .copy:active { transform: scale(.95); }
 .copy.done { color: var(--text); border-color: rgba(255, 255, 255, .45); }
 
@@ -1007,7 +1007,7 @@ footer p { margin: 0; }
   border-radius: 50%;
   background: var(--brand);
   color: var(--bg);
-  box-shadow: 0 12px 30px -10px rgba(255, 212, 0, .55), 0 0 0 6px rgba(255, 212, 0, .08);
+  box-shadow: 0 12px 30px -10px rgba(254, 250, 205, .55), 0 0 0 6px rgba(254, 250, 205, .08);
   opacity: 0;
   visibility: hidden;
   transform: translateY(18px) scale(.85);
@@ -1026,7 +1026,7 @@ footer p { margin: 0; }
   stroke-linejoin: round;
 }
 
-.to-top:hover { transform: translateY(-4px); box-shadow: 0 16px 36px -10px rgba(255, 212, 0, .7), 0 0 0 8px rgba(255, 212, 0, .12); }
+.to-top:hover { transform: translateY(-4px); box-shadow: 0 16px 36px -10px rgba(254, 250, 205, .7), 0 0 0 8px rgba(254, 250, 205, .12); }
 .to-top:hover svg { animation: lift .7s var(--ease) infinite alternate; }
 
 @keyframes lift { to { transform: translateY(-3px); } }
