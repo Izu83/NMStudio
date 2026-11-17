@@ -185,7 +185,7 @@ document.querySelectorAll(".phone-card").forEach(card => {
 
 // Copy email
 async function copyEmail() {
-  const email = "nmstudio.sites@gmail.com";
+  const email = "contact@nmstudio.info";
   try {
     await navigator.clipboard.writeText(email);
   } catch (e) {
